@@ -1,0 +1,34 @@
+import * as orderService from '../services/orderService.js';
+
+export const createOrder = async (req, res) => {
+  try {
+    const savedOrder = await orderService.createOrder(req.body);
+    res.status(201).json(savedOrder);
+  } catch (error) {
+    res.status(400).json({ message: 'Error creating order', error: error.message });
+  }
+};
+
+export const getAllOrders = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 10;
+    const dateRange = req.query.dateRange || '7d';
+    const result = await orderService.getAllOrders(page, limit, dateRange);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ message: 'Error retrieving orders', error: error.message });
+  }
+};
+
+export const getOrderById = async (req, res) => {
+  try {
+    const order = await orderService.getOrderById(req.params.id);
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    res.json(order);
+  } catch (error) {
+    res.status(500).json({ message: 'Error retrieving order', error: error.message });
+  }
+};
