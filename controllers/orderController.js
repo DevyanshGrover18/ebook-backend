@@ -1,4 +1,28 @@
 import * as orderService from '../services/orderService.js';
+import Razorpay from 'razorpay';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+export const createRazorpayOrder = async (req, res) => {
+  try {
+    const instance = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID || 'dummy_key_id',
+      key_secret: process.env.RAZORPAY_KEY_SECRET || 'dummy_key_secret',
+    });
+
+    const options = {
+      amount: Math.round(req.body.amount * 100),
+      currency: "INR",
+      receipt: `receipt_${Date.now()}`
+    };
+
+    const order = await instance.orders.create(options);
+    res.json({ ...order, key_id: process.env.RAZORPAY_KEY_ID || 'dummy_key_id' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating Razorpay order', error: error.message });
+  }
+};
 
 export const createOrder = async (req, res) => {
   try {

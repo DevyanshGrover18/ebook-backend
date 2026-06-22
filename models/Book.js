@@ -33,6 +33,7 @@ const bookSchema = new mongoose.Schema({
   language: { type: String, required: true },
   image: { type: String, required: true },
   imageAlt: { type: String },
+  images: [{ type: String }],
   description: { type: String, required: true },
   keyFeatures: [{ type: String }],
   tableOfContents: [chapterSchema],
