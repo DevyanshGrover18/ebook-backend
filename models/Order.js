@@ -4,7 +4,9 @@ const orderItemSchema = new mongoose.Schema({
   id: { type: String, required: true },
   title: { type: String, required: true },
   price: { type: Number, required: true },
-  author: { type: String, required: true }
+  author: { type: String, required: true },
+  image: { type: String },
+  imageAlt: { type: String }
 });
 
 const orderSchema = new mongoose.Schema({

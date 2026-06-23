@@ -23,7 +23,11 @@ export const getCategoryById = async (req, res) => {
 
 export const createCategory = async (req, res) => {
   try {
-    const savedCategory = await categoryService.createCategory(req.body);
+    let rawData = { ...req.body };
+    if (req.file) {
+      rawData.image = req.file.path;
+    }
+    const savedCategory = await categoryService.createCategory(rawData);
     res.status(201).json(savedCategory);
   } catch (error) {
     res.status(400).json({ message: 'Error creating category', error: error.message });
@@ -32,7 +36,11 @@ export const createCategory = async (req, res) => {
 
 export const updateCategory = async (req, res) => {
   try {
-    const updatedCategory = await categoryService.updateCategory(req.params.id, req.body);
+    let rawData = { ...req.body };
+    if (req.file) {
+      rawData.image = req.file.path;
+    }
+    const updatedCategory = await categoryService.updateCategory(req.params.id, rawData);
     if (!updatedCategory) {
       return res.status(404).json({ message: 'Category not found' });
     }

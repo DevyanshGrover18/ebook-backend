@@ -7,8 +7,8 @@ dotenv.config();
 export const createRazorpayOrder = async (req, res) => {
   try {
     const instance = new Razorpay({
-      key_id: process.env.RAZORPAY_KEY_ID || 'dummy_key_id',
-      key_secret: process.env.RAZORPAY_KEY_SECRET || 'dummy_key_secret',
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
     });
 
     const options = {
@@ -18,7 +18,7 @@ export const createRazorpayOrder = async (req, res) => {
     };
 
     const order = await instance.orders.create(options);
-    res.json({ ...order, key_id: process.env.RAZORPAY_KEY_ID || 'dummy_key_id' });
+    res.json({ ...order, key_id: process.env.RAZORPAY_KEY_ID });
   } catch (error) {
     res.status(500).json({ message: 'Error creating Razorpay order', error: error.message });
   }

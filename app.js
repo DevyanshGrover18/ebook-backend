@@ -7,6 +7,7 @@ import cartRoutes from './routes/cartRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 import faqRoutes from './routes/faqRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import bookRequestRoutes from './routes/bookrequestRoutes.js'
 
 // Load environment variables
 dotenv.config();
@@ -25,6 +26,7 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/faqs', faqRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/book-request', bookRequestRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
