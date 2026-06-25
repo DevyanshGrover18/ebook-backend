@@ -5,8 +5,7 @@ const categorySchema = new mongoose.Schema({
   title: { type: String, required: true },
   publicationsLabel: { type: String, required: true },
   description: { type: String, required: true },
-  image: { type: String, required: true },
-  imageAlt: { type: String },
+  icon: { type: String, required: true, default: 'Scale' },
   href: { type: String, required: true }
 }, { timestamps: true });
 

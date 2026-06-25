@@ -18,9 +18,7 @@ export const createCategory = async (categoryData) => {
 };
 
 export const updateCategory = async (id, categoryData) => {
-  const data = {
-    ...categoryData,
-  };
+  const data = { ...categoryData };
   if (categoryData.id) {
     data.href = `/books?category=${categoryData.id}`;
   }
